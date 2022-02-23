@@ -1,5 +1,8 @@
 name: My-GitHubActions-Basics
-on:
+env:
+  APPLICATION_NAME: "MyFlask"
+  DEPLOY_PACKAGE_NAME: "flask-deploy-ver-${{github.sha}}"
+on: 
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
@@ -17,6 +20,12 @@ jobs:
     - name: Print Hello Message
       run: echo "Hello World from testing"
       
+    - name: Execute few commands
+      run: |
+        echo "Hello Message1"
+        echo "Hello Message2"
+        echo "Application name: ${{env.APPLICATION_NAME}}"
+      
           
   my_deploy:
     runs-on: ubuntu-latest
@@ -24,4 +33,7 @@ jobs:
     steps:
     - name: Print Hello Message
       run: echo "Hello World from deploy"
+      
+    - name: Print Deployment package
+      run: echo "Deploy package name:${{DEPLOY_PACKAGE_NAME}}"
   
